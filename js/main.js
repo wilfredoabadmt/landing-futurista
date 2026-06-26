@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all modules
     initParticles();
     initNavigation();
+    initTechCarousel();
     initScrollAnimations();
     initCounters();
     initCalculator();
@@ -131,6 +132,146 @@ function initParticles() {
             createParticles();
         }, 250);
     });
+}
+
+/* ========================================
+   TECH CAROUSEL
+   ======================================== */
+function initTechCarousel() {
+    const track = document.getElementById('tech-carousel-track');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const dotsContainer = document.getElementById('tech-carousel-dots');
+    
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    const items = track.querySelectorAll('.tech-item');
+    const totalItems = items.length;
+    let itemsPerView = getItemsPerView();
+    let currentIndex = 0;
+    let autoPlayInterval;
+    
+    function getItemsPerView() {
+        if (window.innerWidth <= 480) return 2;
+        if (window.innerWidth <= 768) return 3;
+        return 4;
+    }
+    
+    function getTotalPages() {
+        return Math.ceil(totalItems / itemsPerView);
+    }
+    
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        const pages = getTotalPages();
+        for (let i = 0; i < pages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Página ${i + 1}`);
+            dot.addEventListener('click', () => goToPage(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    function updateCarousel() {
+        const itemWidth = items[0].offsetWidth + 20; // gap
+        const offset = currentIndex * itemsPerView * itemWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+        
+        // Update dots
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        const currentPage = Math.floor(currentIndex / 1);
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentPage);
+        });
+    }
+    
+    function goToPage(page) {
+        const totalPages = getTotalPages();
+        currentIndex = Math.max(0, Math.min(page, totalPages - 1));
+        updateCarousel();
+    }
+    
+    function next() {
+        const totalPages = getTotalPages();
+        if (currentIndex < totalPages - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+        updateCarousel();
+    }
+    
+    function prev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = getTotalPages() - 1;
+        }
+        updateCarousel();
+    }
+    
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(next, 4000);
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+        next();
+        startAutoPlay();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        prev();
+        startAutoPlay();
+    });
+    
+    // Pause on hover
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+    
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+    }, { passive: true });
+    
+    track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) next();
+            else prev();
+        }
+        startAutoPlay();
+    }, { passive: true });
+    
+    // Handle resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            itemsPerView = getItemsPerView();
+            currentIndex = 0;
+            createDots();
+            updateCarousel();
+        }, 250);
+    });
+    
+    // Initialize
+    createDots();
+    updateCarousel();
+    startAutoPlay();
 }
 
 /* ========================================
@@ -277,20 +418,20 @@ function initCalculator() {
     const calcSlider = document.getElementById('complexity');
     const calcAmount = document.getElementById('calc-amount');
     
-    // Base prices
+    // Base prices (Mercado Latino)
     const basePrices = {
-        'landing': 499,
-        'web': 899,
-        'ecommerce': 1299,
-        'custom': 1799
+        'landing': 149,
+        'web': 299,
+        'ecommerce': 449,
+        'custom': 699
     };
     
-    // Additional service prices
+    // Additional service prices (Mercado Latino)
     const additionalPrices = {
-        'seo': 299,
-        'ia': 599,
-        'crm': 399,
-        'ads': 499
+        'seo': 99,
+        'ia': 199,
+        'crm': 149,
+        'ads': 179
     };
     
     let selectedProject = 'landing';
