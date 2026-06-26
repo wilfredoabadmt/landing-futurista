@@ -1,0 +1,624 @@
+/* ========================================
+   AS Marketers - Main JavaScript
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all modules
+    initParticles();
+    initNavigation();
+    initScrollAnimations();
+    initCounters();
+    initCalculator();
+    initForms();
+    initSmoothScroll();
+});
+
+/* ========================================
+   PARTICLES BACKGROUND
+   ======================================== */
+function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+    
+    // Set canvas size
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Particle class
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.5 + 0.1;
+            this.color = this.getColor();
+        }
+        
+        getColor() {
+            const colors = [
+                'rgba(0, 245, 255,',   // cyan
+                'rgba(184, 41, 221,',  // purple
+                'rgba(79, 70, 229,',   // blue
+                'rgba(236, 72, 153,'   // pink
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            // Wrap around edges
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `${this.color}${this.opacity})`;
+            ctx.fill();
+        }
+    }
+    
+    // Create particles
+    function createParticles() {
+        const numParticles = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
+    }
+    
+    // Draw connections
+    function drawConnections() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 150) {
+                    const opacity = (1 - distance / 150) * 0.3;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 245, 255, ${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        
+        drawConnections();
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    createParticles();
+    animate();
+    
+    // Recreate particles on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            resizeCanvas();
+            createParticles();
+        }, 250);
+    });
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+function initNavigation() {
+    const header = document.getElementById('header');
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Mobile menu toggle
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            navToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (navClose) {
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Close menu on link click
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Active link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    });
+}
+
+/* ========================================
+   SCROLL ANIMATIONS
+   ======================================== */
+function initScrollAnimations() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+/* ========================================
+   COUNTER ANIMATION
+   ======================================== */
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-target]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+    
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+}
+
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
+/* ========================================
+   CALCULATOR
+   ======================================== */
+function initCalculator() {
+    const calcOptions = document.querySelectorAll('.calc-option');
+    const calcCheckboxes = document.querySelectorAll('.calc-checkbox input');
+    const calcSlider = document.getElementById('complexity');
+    const calcAmount = document.getElementById('calc-amount');
+    
+    // Base prices
+    const basePrices = {
+        'landing': 499,
+        'web': 899,
+        'ecommerce': 1299,
+        'custom': 1799
+    };
+    
+    // Additional service prices
+    const additionalPrices = {
+        'seo': 299,
+        'ia': 599,
+        'crm': 399,
+        'ads': 499
+    };
+    
+    let selectedProject = 'landing';
+    let selectedServices = [];
+    let complexity = 3;
+    
+    // Project type selection
+    calcOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            calcOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            selectedProject = option.getAttribute('data-value');
+            updatePrice();
+        });
+    });
+    
+    // Additional services selection
+    calcCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                selectedServices.push(checkbox.value);
+            } else {
+                selectedServices = selectedServices.filter(s => s !== checkbox.value);
+            }
+            updatePrice();
+        });
+    });
+    
+    // Complexity slider
+    if (calcSlider) {
+        calcSlider.addEventListener('input', (e) => {
+            complexity = parseInt(e.target.value);
+            updatePrice();
+        });
+    }
+    
+    // Update price calculation
+    function updatePrice() {
+        let total = basePrices[selectedProject] || 499;
+        
+        // Add additional services
+        selectedServices.forEach(service => {
+            total += additionalPrices[service] || 0;
+        });
+        
+        // Apply complexity multiplier
+        const multiplier = 0.8 + (complexity * 0.1);
+        total = Math.round(total * multiplier);
+        
+        // Animate price change
+        animatePrice(calcAmount, total);
+    }
+    
+    function animatePrice(element, targetPrice) {
+        const startPrice = parseInt(element.textContent) || 0;
+        const duration = 500;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const currentPrice = Math.round(startPrice + (targetPrice - startPrice) * progress);
+            element.textContent = currentPrice;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+function initForms() {
+    // Ebook form
+    const ebookForm = document.getElementById('ebook-form');
+    if (ebookForm) {
+        ebookForm.addEventListener('submit', handleEbookSubmit);
+    }
+    
+    // Contact form
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactSubmit);
+    }
+}
+
+function handleEbookSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span>Descargando...</span>';
+    submitBtn.disabled = true;
+    
+    // Simulate download (replace with actual endpoint)
+    setTimeout(() => {
+        // Reset form
+        form.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Show success message
+        showNotification('¡Ebook descargado correctamente! Revisa tu email.', 'success');
+    }, 1500);
+}
+
+function handleContactSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span>Enviando...</span>';
+    submitBtn.disabled = true;
+    
+    // Simulate submission (replace with actual endpoint)
+    setTimeout(() => {
+        // Reset form
+        form.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Show success message
+        showNotification('¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.', 'success');
+    }, 1500);
+}
+
+function showNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✓' : '!'}</span>
+            <span class="notification-message">${message}</span>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        padding: 16px 24px;
+        background: ${type === 'success' ? 'rgba(0, 245, 255, 0.1)' : 'rgba(239, 68, 68, 0.1)'};
+        border: 1px solid ${type === 'success' ? 'rgba(0, 245, 255, 0.3)' : 'rgba(239, 68, 68, 0.3)'};
+        border-radius: 12px;
+        color: ${type === 'success' ? '#00f5ff' : '#ef4444'};
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        z-index: 9999;
+        animation: slideInRight 0.3s ease;
+        backdrop-filter: blur(10px);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+}
+
+/* ========================================
+   SMOOTH SCROLL
+   ======================================== */
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            
+            if (target) {
+                const headerHeight = document.getElementById('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+/* ========================================
+   UTILITY FUNCTIONS
+   ======================================== */
+
+// Debounce function
+function debounce(func, wait = 20, immediate = true) {
+    let timeout;
+    return function executedFunction() {
+        const context = this;
+        const args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// Throttle function
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Add animation styles dynamically
+const animationStyles = document.createElement('style');
+animationStyles.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .notification-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: currentColor;
+        color: #0a0a0f;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+`;
+document.head.appendChild(animationStyles);
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+// Lazy load images (if any)
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Preload critical resources
+function preloadResource(url, type) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = url;
+    link.as = type;
+    document.head.appendChild(link);
+}
+
+// Console branding
+console.log('%c AS Marketers ', 'background: linear-gradient(135deg, #00f5ff, #b829dd); color: #0a0a0f; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
+console.log('%c Ingeniería de Sistemas & Marketing Digital con IA ', 'color: #00f5ff; font-size: 12px;');

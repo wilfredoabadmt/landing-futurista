@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Marketers | Ingeniería de Sistemas & Marketing Digital con IA</title>
+    <meta name="description" content="Ecosistemas digitales impulsados por Inteligencia Artificial. Automatización, desarrollo web y growth marketing para escalar tu negocio.">
+    <meta name="keywords" content="IA, automatización, marketing digital, desarrollo web, e-commerce, n8n, agents inteligentes">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AS Marketers | IA & Marketing Digital">
+    <meta property="og:description" content="Ecosistemas digitales impulsados por Inteligencia Artificial">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header/Navbar -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav-logo">
+                <span class="logo-text">AS</span>
+                <span class="logo-accent">MARKETERS</span>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li><a href="#perfil" class="nav-link">Perfil</a></li>
+                    <li><a href="#soluciones" class="nav-link">Soluciones</a></li>
+                    <li><a href="#tecnologias" class="nav-link">Tecnologías</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <a href="#contacto" class="nav-cta">Agendar Sesión</a>
+                <button class="nav-close" id="nav-close" aria-label="Cerrar menú">
+                    <span></span>
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="hero-video-container">
+                <!-- Video Seedance placeholder -->
+                <div class="video-fallback">
+                    <div class="cyber-grid"></div>
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                        <div class="shape shape-4"></div>
+                        <div class="shape shape-5"></div>
+                    </div>
+                </div>
+                
+                <!-- Video Seedance (preparado para integración futura) -->
+                <!-- <video class="seedance-video" loop muted playsinline>
+                    <source src="assets/seedance-animation.mp4" type="video/mp4">
+                </video> -->
+                
+                <!-- Overlay -->
+                <div class="video-overlay"></div>
+            </div>
+            
+            <div class="hero-content container">
+                <div class="hero-badge animate-fade-in">
+                    <span class="badge-dot"></span>
+                    <span>Ingeniería + IA + Marketing</span>
+                </div>
+                
+                <h1 class="hero-title animate-fade-in-up">
+                    <span class="title-line">Ecosistemas Digitales</span>
+                    <span class="title-line gradient-text">Impulsados por IA</span>
+                </h1>
+                
+                <p class="hero-description animate-fade-in-up delay-1">
+                    Soy Wilfredo Abad. Diseño y desarrollo ecosistemas digitales de alto rendimiento 
+                    que eliminan la dependencia de procesos manuales, impulsan tus conversiones 
+                    y escalan tu negocio al instante.
+                </p>
+                
+                <div class="hero-cta animate-fade-in-up delay-2">
+                    <a href="#contacto" class="btn btn-primary">
+                        <span>Calcula tu Presupuesto</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#soluciones" class="btn btn-secondary">
+                        <span>Ver Soluciones</span>
+                    </a>
+                </div>
+                
+                <div class="hero-stats animate-fade-in-up delay-3">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Años de Experiencia</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="200">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Portales Desarrollados</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Países (EE.UU./España/Latam)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-scroll">
+                <a href="#perfil" class="scroll-indicator">
+                    <span class="scroll-text">Scroll</span>
+                    <span class="scroll-line"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Perfil Section -->
+        <section class="perfil section" id="perfil">
+            <div class="container">
+                <div class="perfil-grid">
+                    <div class="perfil-image-wrapper animate-on-scroll">
+                        <div class="perfil-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="image-border"></div>
+                            <div class="image-glow"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="perfil-content animate-on-scroll">
+                        <span class="section-tag">Sobre Mí</span>
+                        <h2 class="section-title">Ingeniero de Sistemas y Especialista en Growth Marketing</h2>
+                        <p class="perfil-highlight">
+                            No contratas a un diseñador genérico. Contratas a un <strong>Departamento de TI y Marketing</strong> en una sola persona.
+                        </p>
+                        <p class="perfil-text">
+                            Mi enfoque combina la precisión de la ingeniería informática con el análisis estratégico del marketing. 
+                            He diseñado infraestructuras de red y servidores para el gobierno y administrado portales con alta concurrencia 
+                            de usuarios, conectando APIs complejas y bases de datos robustas.
+                        </p>
+                        <p class="perfil-text">
+                            Mi misión es usar esa experiencia técnica para construir sistemas de negocio que simplifiquen tu día a día, 
+                            eliminando los procesos repetitivos mediante la automatización inteligente.
+                        </p>
+                        
+                        <div class="perfil-skills">
+                            <div class="skill-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <span>Seguridad de Servidores</span>
+                            </div>
+                            <div class="skill-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                <span>Integraciones CRM</span>
+                            </div>
+                            <div class="skill-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                </svg>
+                                <span>Automatización de TI</span>
+                            </div>
+                            <div class="skill-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                                <span>Growth & Conversión</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline -->
+                <div class="timeline animate-on-scroll">
+                    <h3 class="timeline-title">Trayectoria Sólida</h3>
+                    <div class="timeline-container">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2018 - Presente</span>
+                                <h4>Consultor Digital Internacional</h4>
+                                <p>Gestión técnica de portales web interactivos y desarrollo de comercio electrónico para clientes en EE.UU., España, Colombia y Bolivia.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2015 - 2018</span>
+                                <h4>Profesional en Operaciones</h4>
+                                <p>Optimización y digitalización nacional de plataformas de atención al usuario para la coordinación de la protección de derechos de consumidores.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2012 - 2015</span>
+                                <h4>Evaluación y Seguimiento de Proyectos</h4>
+                                <p>Auditoría de sistemas e infraestructura TI corporativas de proyectos estatales, velando por la calidad y cumplimiento del presupuesto.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2010 - 2012</span>
+                                <h4>Jefe de Unidad de Informática</h4>
+                                <p>Administración y seguridad informática de bases de datos críticas gubernamentales a nivel nacional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soluciones Section -->
+        <section class="soluciones section" id="soluciones">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-tag">Soluciones</span>
+                    <h2 class="section-title">Ecosistemas Digitales y Automatización de Negocios</h2>
+                    <p class="section-description">
+                        No entrego plantillas prefabricadas. Construyo sistemas de negocio optimizados desde el código 
+                        para que funcionen con la máxima velocidad, conviertan visitas de forma automática y crezcan sin límites técnicos.
+                    </p>
+                </div>
+                
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Diseño y Desarrollo Web</h3>
+                        <p class="service-description">
+                            Páginas web corporativas, landing pages de alta conversión y portales sectoriales optimizados a medida.
+                        </p>
+                        <ul class="service-features">
+                            <li>Sitios corporativos</li>
+                            <li>Landing pages</li>
+                            <li>SEO técnico</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="service-card featured animate-on-scroll">
+                        <div class="service-badge">IA</div>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Automatización con IA</h3>
+                        <p class="service-description">
+                            Elimina las tareas repetitivas de tu equipo. Diseño e implemento flujos y agentes inteligentes con n8n y Make.
+                        </p>
+                        <ul class="service-features">
+                            <li>Agentes n8n/Make</li>
+                            <li>Integración APIs</li>
+                            <li>Workflows automáticos</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">E-Commerce & Dropshipping</h3>
+                        <p class="service-description">
+                            Tiendas online rápidas con stock autogestionable, integraciones de pago y control de envíos.
+                        </p>
+                        <ul class="service-features">
+                            <li>Stripe/PayPal</li>
+                            <li>Stock automático</li>
+                            <li>Checkout optimizado</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Publicidad de Alto ROAS</h3>
+                        <p class="service-description">
+                            Campañas publicitarias en Meta Ads y Google Ads enfocadas en maximizar el Retorno de la Inversión.
+                        </p>
+                        <ul class="service-features">
+                            <li>Meta Ads</li>
+                            <li>Google Ads</li>
+                            <li>Optimización ROAS</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Administración de CRM</h3>
+                        <p class="service-description">
+                            Sincronización automatizada de tu embudo de ventas con CRM empresariales o soluciones a medida.
+                        </p>
+                        <ul class="service-features">
+                            <li>HubSpot/Salesforce</li>
+                            <li>Paneles a medida</li>
+                            <li>Control de leads</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 6 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Producción Multimedia</h3>
+                        <p class="service-description">
+                            Edición y producción de material audiovisual premium para redes sociales y anuncios.
+                        </p>
+                        <ul class="service-features">
+                            <li>Video producción</li>
+                            <li>Diseño gráfico</li>
+                            <li>Contenido redes</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 7 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Consultoría Tecnológica</h3>
+                        <p class="service-description">
+                            Análisis estratégico y asesoramiento técnico para optimizar tu infraestructura digital.
+                        </p>
+                        <ul class="service-features">
+                            <li>Auditoría TI</li>
+                            <li>Estrategia digital</li>
+                            <li>Optimización</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Service 8 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Formación y Cursos</h3>
+                        <p class="service-description">
+                            Formación práctica para monetizar tu conocimiento en diseño web, WordPress y SEO.
+                        </p>
+                        <ul class="service-features">
+                            <li>WordPress avanzado</li>
+                            <li>SEO y copywriting</li>
+                            <li>Monetización</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tecnologías Section -->
+        <section class="tecnologias section" id="tecnologias">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-tag">Tecnologías</span>
+                    <h2 class="section-title">Herramientas Premium Incluidas</h2>
+                    <p class="section-description">
+                        Licencias comerciales originales de las herramientas más potentes del mercado. 
+                        La mayoría de agencias te cobran costes extra recurrentes por esto. Yo no.
+                    </p>
+                </div>
+                
+                <div class="tech-marquee">
+                    <div class="marquee-track">
+                        <div class="tech-item">
+                            <span class="tech-name">n8n</span>
+                            <span class="tech-category">Automatización</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Make</span>
+                            <span class="tech-category">Workflows</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">WordPress</span>
+                            <span class="tech-category">CMS</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Elementor</span>
+                            <span class="tech-category">Builder</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">RankMath</span>
+                            <span class="tech-category">SEO</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Stripe</span>
+                            <span class="tech-category">Pagos</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">HubSpot</span>
+                            <span class="tech-category">CRM</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Google Ads</span>
+                            <span class="tech-category">Publicidad</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Meta Ads</span>
+                            <span class="tech-category">Publicidad</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">LiteSpeed</span>
+                            <span class="tech-category">Servidor</span>
+                        </div>
+                        <!-- Duplicar para loop infinito -->
+                        <div class="tech-item">
+                            <span class="tech-name">n8n</span>
+                            <span class="tech-category">Automatización</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Make</span>
+                            <span class="tech-category">Workflows</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">WordPress</span>
+                            <span class="tech-category">CMS</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Elementor</span>
+                            <span class="tech-category">Builder</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">RankMath</span>
+                            <span class="tech-category">SEO</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Stripe</span>
+                            <span class="tech-category">Pagos</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">HubSpot</span>
+                            <span class="tech-category">CRM</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Google Ads</span>
+                            <span class="tech-category">Publicidad</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Meta Ads</span>
+                            <span class="tech-category">Publicidad</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">LiteSpeed</span>
+                            <span class="tech-category">Servidor</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Por qué elegirme -->
+                <div class="why-choose">
+                    <h3 class="why-title animate-on-scroll">¿Por Qué Elegirme?</h3>
+                    <div class="why-grid">
+                        <div class="why-card animate-on-scroll">
+                            <div class="why-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </div>
+                            <h4>Velocidad Extrema</h4>
+                            <p>Sitios optimizados que cargan en menos de 2 segundos.</p>
+                        </div>
+                        <div class="why-card animate-on-scroll">
+                            <div class="why-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <h4>Seguridad Empresarial</h4>
+                            <p>Protección de nivel corporativo contra amenazas digitales.</p>
+                        </div>
+                        <div class="why-card animate-on-scroll">
+                            <div class="why-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <h4>Soporte 24/7</h4>
+                            <p>Monitoreo continuo y respuesta inmediata ante incidencias.</p>
+                        </div>
+                        <div class="why-card animate-on-scroll">
+                            <div class="why-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <h4>Sin Costos Ocultos</h4>
+                            <p>Licencias premium incluidas sin recargos adicionales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ebook Section -->
+        <section class="ebook section">
+            <div class="container">
+                <div class="ebook-card animate-on-scroll">
+                    <div class="ebook-content">
+                        <span class="section-tag">Recurso Gratuito</span>
+                        <h2 class="section-title">Descarga mi Ebook Gratis</h2>
+                        <h3 class="ebook-subtitle">11 claves para crear una web que venda</h3>
+                        <p class="ebook-description">
+                            Aprende de forma autónoma los principios técnicos de velocidad y psicología de conversión 
+                            que utilizo en mis proyectos para captar clientes en automático.
+                        </p>
+                        <form class="ebook-form" id="ebook-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Tu email" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <span>Descargar Ebook Ahora</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="ebook-visual">
+                        <div class="book-3d">
+                            <div class="book-cover">
+                                <div class="book-content">
+                                    <span class="book-badge">EBOOK GRATIS</span>
+                                    <h4>11 Claves para una Web que Vende</h4>
+                                    <span class="book-author">Wilfredo Abad</span>
+                                </div>
+                            </div>
+                            <div class="book-spine"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="calculator section" id="calculadora">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-tag">Presupuesto</span>
+                    <h2 class="section-title">Calcula tu Presupuesto Online</h2>
+                    <p class="section-description">
+                        Obtén una estimación instantánea del costo de tu proyecto según tus necesidades específicas.
+                    </p>
+                </div>
+                
+                <div class="calc-wrapper animate-on-scroll">
+                    <div class="calc-form">
+                        <div class="calc-field">
+                            <label>Tipo de Proyecto</label>
+                            <div class="calc-options">
+                                <button class="calc-option active" data-value="landing">Landing Page</button>
+                                <button class="calc-option" data-value="web">Sitio Web</button>
+                                <button class="calc-option" data-value="ecommerce">E-Commerce</button>
+                                <button class="calc-option" data-value="custom">Personalizado</button>
+                            </div>
+                        </div>
+                        
+                        <div class="calc-field">
+                            <label>Servicios Adicionales</label>
+                            <div class="calc-checkboxes">
+                                <label class="calc-checkbox">
+                                    <input type="checkbox" value="seo">
+                                    <span class="checkmark"></span>
+                                    <span>SEO Avanzado</span>
+                                </label>
+                                <label class="calc-checkbox">
+                                    <input type="checkbox" value="ia">
+                                    <span class="checkmark"></span>
+                                    <span>Automatización IA</span>
+                                </label>
+                                <label class="calc-checkbox">
+                                    <input type="checkbox" value="crm">
+                                    <span class="checkmark"></span>
+                                    <span>Integración CRM</span>
+                                </label>
+                                <label class="calc-checkbox">
+                                    <input type="checkbox" value="ads">
+                                    <span class="checkmark"></span>
+                                    <span>Gestión Publicitaria</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="calc-field">
+                            <label>Complejidad</label>
+                            <input type="range" class="calc-slider" id="complexity" min="1" max="5" value="3">
+                            <div class="slider-labels">
+                                <span>Básica</span>
+                                <span>Media</span>
+                                <span>Avanzada</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-result">
+                        <div class="result-card">
+                            <span class="result-label">Presupuesto Estimado</span>
+                            <div class="result-price">
+                                <span class="currency">$</span>
+                                <span class="amount" id="calc-amount">499</span>
+                                <span class="period">USD</span>
+                            </div>
+                            <span class="result-note">*El precio final puede variar según requerimientos específicos</span>
+                            <a href="#contacto" class="btn btn-primary btn-full">
+                                <span>Solicitar Cotización Formal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contacto">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info animate-on-scroll">
+                        <span class="section-tag">Contacto</span>
+                        <h2 class="section-title">¿Listo para Automatizar y Escalar?</h2>
+                        <p class="contact-description">
+                            Escríbenos y diseñemos un sistema web a la medida de tus necesidades y objetivos comerciales. 
+                            Recibe una consultoría técnica gratuita de 15 minutos.
+                        </p>
+                        
+                        <div class="contact-methods">
+                            <a href="https://wa.me/59171523780" class="contact-method" target="_blank">
+                                <div class="method-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                    </svg>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">WhatsApp</span>
+                                    <span class="method-value">+591 71523780</span>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:contacto@asmarketers.com" class="contact-method">
+                                <div class="method-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">Email</span>
+                                    <span class="method-value">contacto@asmarketers.com</span>
+                                </div>
+                            </a>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">Global</span>
+                                    <span class="method-value">EE.UU. / España / Latam</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/MarketingConWilfredoAbad" class="social-link" target="_blank" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/soywilfredoabad/" class="social-link" target="_blank" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.tiktok.com/@soywilfredoabad" class="social-link" target="_blank" aria-label="TikTok">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.87a8.16 8.16 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.3z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/soywilfredoabad/" class="social-link" target="_blank" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-wrapper animate-on-scroll">
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="Tu nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Tu email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="Tu teléfono (opcional)">
+                            </div>
+                            <div class="form-group">
+                                <select name="service" required>
+                                    <option value="" disabled selected>¿Qué servicio necesitas?</option>
+                                    <option value="landing">Landing Page</option>
+                                    <option value="web">Sitio Web Corporativo</option>
+                                    <option value="ecommerce">E-Commerce</option>
+                                    <option value="ia">Automatización IA</option>
+                                    <option value="crm">Integración CRM</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Cuéntanos sobre tu proyecto" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <span>Enviar Mensaje</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-text">AS</span>
+                        <span class="logo-accent">MARKETERS</span>
+                    </a>
+                    <p class="footer-description">
+                        Sistemas web profesionales que automatizan tus procesos y multiplican tus ventas. 
+                        Creamos experiencias digitales a tu medida.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#soluciones">Consultoría Tecnológica</a></li>
+                        <li><a href="#soluciones">Desarrollo Web Full Stack</a></li>
+                        <li><a href="#soluciones">E-Commerce & Dropshipping</a></li>
+                        <li><a href="#soluciones">Automatización IA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Compañía</h4>
+                    <ul>
+                        <li><a href="#perfil">Sobre Mí</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>
+                            <a href="https://wa.me/59171523780" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                                +591 71523780
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:contacto@asmarketers.com">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                contacto@asmarketers.com
+                            </a>
+                        </li>
+                        <li>
+                            <span>Global (EE.UU./España/Latam)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 AS Marketers. Todos los derechos reservados.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/MarketingConWilfredoAbad" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/soywilfredoabad/" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@soywilfredoabad" target="_blank" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.87a8.16 8.16 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/soywilfredoabad/" target="_blank" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# AS Marketers - Landing Page
+# No Python dependencies required for static site
