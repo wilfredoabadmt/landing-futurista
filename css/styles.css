@@ -938,161 +938,102 @@ body {
 }
 
 /* ========================================
-   TECNOLOGÍAS SECTION
+   TECNOLOGÍAS SECTION - SCROLL HORIZONTAL
    ======================================== */
 .tecnologias {
-    overflow: visible;
-}
-
-.tech-carousel {
-    margin: 60px auto;
-    max-width: 1200px;
-    position: relative;
-    padding: 0 60px;
-}
-
-.carousel-viewport {
     overflow: hidden;
+}
+
+.tech-scroll-container {
+    margin: 50px auto;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
     padding: 20px 0;
 }
 
-.carousel-track {
+.tech-scroll-track {
     display: flex;
-    flex-wrap: nowrap;
     gap: 20px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    width: max-content;
+    padding: 0 40px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.tech-item {
+.tech-scroll-track::-webkit-scrollbar {
+    display: none;
+}
+
+.tech-card {
     flex: 0 0 auto;
     width: 180px;
     padding: 30px 24px;
-    background: var(--glass-bg);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     text-align: center;
-    transition: var(--transition-normal);
+    scroll-snap-align: start;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.tech-item:hover {
+.tech-card:hover {
     border-color: var(--color-accent-cyan);
-    background: rgba(0, 245, 255, 0.05);
+    background: linear-gradient(135deg, rgba(0,245,255,0.1) 0%, rgba(184,41,221,0.05) 100%);
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
 }
 
-.tech-name {
+.tech-card-name {
     display: block;
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 6px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
     color: var(--color-text-primary);
 }
 
-.tech-category {
+.tech-card-cat {
+    display: block;
     font-size: 0.7rem;
     color: var(--color-accent-cyan);
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 500;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 52px;
-    height: 52px;
-    background: var(--color-bg-secondary);
-    border: 2px solid var(--color-border);
-    border-radius: 50%;
-    color: var(--color-text-primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition-normal);
-    z-index: 10;
-}
-
-.carousel-btn:hover {
-    background: var(--color-accent-cyan);
-    border-color: var(--color-accent-cyan);
-    color: var(--color-bg-primary);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn svg {
-    width: 24px;
-    height: 24px;
-}
-
-.carousel-prev {
-    left: 0;
-}
-
-.carousel-next {
-    right: 0;
-}
-
-.carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 30px;
-}
-
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-border);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-normal);
-    padding: 0;
-}
-
-.carousel-dot.active {
-    background: var(--color-accent-cyan);
-    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
-}
-
-.carousel-dot:hover {
-    background: var(--color-accent-cyan);
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
-    .tech-carousel {
-        padding: 0 50px;
+    .tech-scroll-track {
+        padding: 0 20px;
+        gap: 15px;
     }
     
-    .tech-item {
+    .tech-card {
         width: 150px;
-        padding: 24px 16px;
+        padding: 24px 18px;
     }
     
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .carousel-btn svg {
-        width: 20px;
-        height: 20px;
+    .tech-card-name {
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .tech-carousel {
-        padding: 0 45px;
+    .tech-card {
+        width: 130px;
+        padding: 20px 14px;
     }
     
-    .tech-item {
-        width: 130px;
-        padding: 20px 12px;
+    .tech-card-name {
+        font-size: 1rem;
+    }
+    
+    .tech-card-cat {
+        font-size: 0.6rem;
     }
 }
 
