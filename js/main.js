@@ -15,177 +15,95 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================
-   TECH CAROUSEL - FUTURISTIC
+   TECH CAROUSEL - SIMPLE
    ======================================== */
 function initTechCarousel() {
-    const track = document.getElementById('tech-track');
+    const slider = document.getElementById('tech-slider');
     const prevBtn = document.getElementById('tech-prev');
     const nextBtn = document.getElementById('tech-next');
     const dotsContainer = document.getElementById('tech-dots');
     
-    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+    if (!slider || !prevBtn || !nextBtn || !dotsContainer) return;
     
-    const cards = track.querySelectorAll('.tech-futuristic-card');
-    const totalCards = cards.length;
+    const slides = slider.querySelectorAll('.tech-slide');
+    const totalSlides = slides.length;
     let currentIndex = 0;
-    let cardsPerView = getCardsPerView();
+    let slidesPerView = 5;
     let autoPlayInterval;
     
-    function getCardsPerView() {
-        const viewport = document.querySelector('.tech-carousel-viewport');
-        if (!viewport) return 4;
-        const viewportWidth = viewport.offsetWidth;
-        const cardWidth = 224; // 200px + 24px gap
-        return Math.floor(viewportWidth / cardWidth);
+    function updateSlidesPerView() {
+        const w = window.innerWidth;
+        if (w <= 480) slidesPerView = 2;
+        else if (w <= 768) slidesPerView = 3;
+        else slidesPerView = 5;
     }
     
     function getMaxIndex() {
-        return Math.max(0, totalCards - cardsPerView);
+        return Math.max(0, totalSlides - slidesPerView);
     }
     
     function createDots() {
         dotsContainer.innerHTML = '';
         const numDots = getMaxIndex() + 1;
-        
         for (let i = 0; i < numDots; i++) {
             const dot = document.createElement('button');
             dot.className = 'tech-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Grupo ${i + 1}`);
-            dot.addEventListener('click', () => {
-                goToIndex(i);
-                resetAutoPlay();
-            });
+            dot.addEventListener('click', () => { goToIndex(i); resetAutoPlay(); });
             dotsContainer.appendChild(dot);
         }
     }
     
     function updateDots() {
-        const dots = dotsContainer.querySelectorAll('.tech-dot');
-        dots.forEach((dot, i) => {
+        dotsContainer.querySelectorAll('.tech-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentIndex);
         });
     }
     
-    function updateCarousel() {
-        const cardWidth = cards[0].offsetWidth + 24; // gap
-        const offset = currentIndex * cardWidth;
-        track.style.transform = `translateX(-${offset}px)`;
+    function updateSlider() {
+        const slideWidth = slides[0].offsetWidth;
+        const offset = currentIndex * slideWidth;
+        slider.scrollTo({ left: offset, behavior: 'smooth' });
         updateDots();
     }
     
     function goToIndex(index) {
-        const maxIdx = getMaxIndex();
-        currentIndex = Math.max(0, Math.min(index, maxIdx));
-        updateCarousel();
+        currentIndex = Math.max(0, Math.min(index, getMaxIndex()));
+        updateSlider();
     }
     
     function next() {
-        if (currentIndex < getMaxIndex()) {
-            currentIndex++;
-        } else {
-            currentIndex = 0;
-        }
-        updateCarousel();
+        currentIndex = currentIndex < getMaxIndex() ? currentIndex + 1 : 0;
+        updateSlider();
     }
     
     function prev() {
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = getMaxIndex();
-        }
-        updateCarousel();
+        currentIndex = currentIndex > 0 ? currentIndex - 1 : getMaxIndex();
+        updateSlider();
     }
     
-    function startAutoPlay() {
-        stopAutoPlay();
-        autoPlayInterval = setInterval(next, 3000);
-    }
+    function startAutoPlay() { stopAutoPlay(); autoPlayInterval = setInterval(next, 3000); }
+    function stopAutoPlay() { if (autoPlayInterval) clearInterval(autoPlayInterval); }
+    function resetAutoPlay() { stopAutoPlay(); startAutoPlay(); }
     
-    function stopAutoPlay() {
-        if (autoPlayInterval) {
-            clearInterval(autoPlayInterval);
-        }
-    }
+    nextBtn.addEventListener('click', () => { next(); resetAutoPlay(); });
+    prevBtn.addEventListener('click', () => { prev(); resetAutoPlay(); });
     
-    function resetAutoPlay() {
-        stopAutoPlay();
-        startAutoPlay();
-    }
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
     
-    // Event listeners
-    nextBtn.addEventListener('click', () => {
-        next();
-        resetAutoPlay();
-    });
-    
-    prevBtn.addEventListener('click', () => {
-        prev();
-        resetAutoPlay();
-    });
-    
-    // Pause on hover
-    track.addEventListener('mouseenter', stopAutoPlay);
-    track.addEventListener('mouseleave', startAutoPlay);
-    
-    // Touch/Swipe support
     let touchStartX = 0;
-    let touchEndX = 0;
-    let isDragging = false;
-    
-    track.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        isDragging = true;
-        stopAutoPlay();
-    }, { passive: true });
-    
-    track.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        touchEndX = e.touches[0].clientX;
-    }, { passive: true });
-    
-    track.addEventListener('touchend', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) next();
-            else prev();
-        }
+    slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; stopAutoPlay(); }, { passive: true });
+    slider.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
         startAutoPlay();
     }, { passive: true });
     
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        const rect = track.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-            if (e.key === 'ArrowLeft') {
-                prev();
-                resetAutoPlay();
-            } else if (e.key === 'ArrowRight') {
-                next();
-                resetAutoPlay();
-            }
-        }
-    });
+    window.addEventListener('resize', () => { updateSlidesPerView(); currentIndex = 0; createDots(); updateSlider(); });
     
-    // Handle resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            cardsPerView = getCardsPerView();
-            currentIndex = 0;
-            createDots();
-            updateCarousel();
-        }, 250);
-    });
-    
-    // Initialize
+    updateSlidesPerView();
     createDots();
-    updateCarousel();
+    slider.scrollLeft = 0;
     startAutoPlay();
 }
 
