@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all modules
     initParticles();
     initNavigation();
+    initTechCarousel();
     initScrollAnimations();
     initCounters();
     initCalculator();
@@ -14,7 +15,182 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================
-   PARTICLES BACKGROUND
+   TECH CAROUSEL - FUTURISTIC
+   ======================================== */
+function initTechCarousel() {
+    const track = document.getElementById('tech-track');
+    const prevBtn = document.getElementById('tech-prev');
+    const nextBtn = document.getElementById('tech-next');
+    const dotsContainer = document.getElementById('tech-dots');
+    
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    const cards = track.querySelectorAll('.tech-futuristic-card');
+    const totalCards = cards.length;
+    let currentIndex = 0;
+    let cardsPerView = getCardsPerView();
+    let autoPlayInterval;
+    
+    function getCardsPerView() {
+        const viewport = document.querySelector('.tech-carousel-viewport');
+        if (!viewport) return 4;
+        const viewportWidth = viewport.offsetWidth;
+        const cardWidth = 224; // 200px + 24px gap
+        return Math.floor(viewportWidth / cardWidth);
+    }
+    
+    function getMaxIndex() {
+        return Math.max(0, totalCards - cardsPerView);
+    }
+    
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        const numDots = getMaxIndex() + 1;
+        
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'tech-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Grupo ${i + 1}`);
+            dot.addEventListener('click', () => {
+                goToIndex(i);
+                resetAutoPlay();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.tech-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    function updateCarousel() {
+        const cardWidth = cards[0].offsetWidth + 24; // gap
+        const offset = currentIndex * cardWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+        updateDots();
+    }
+    
+    function goToIndex(index) {
+        const maxIdx = getMaxIndex();
+        currentIndex = Math.max(0, Math.min(index, maxIdx));
+        updateCarousel();
+    }
+    
+    function next() {
+        if (currentIndex < getMaxIndex()) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+        updateCarousel();
+    }
+    
+    function prev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = getMaxIndex();
+        }
+        updateCarousel();
+    }
+    
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(next, 3000);
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    function resetAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+        next();
+        resetAutoPlay();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        prev();
+        resetAutoPlay();
+    });
+    
+    // Pause on hover
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+    
+    // Touch/Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+        stopAutoPlay();
+    }, { passive: true });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchEndX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    track.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) next();
+            else prev();
+        }
+        startAutoPlay();
+    }, { passive: true });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const rect = track.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+            if (e.key === 'ArrowLeft') {
+                prev();
+                resetAutoPlay();
+            } else if (e.key === 'ArrowRight') {
+                next();
+                resetAutoPlay();
+            }
+        }
+    });
+    
+    // Handle resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            cardsPerView = getCardsPerView();
+            currentIndex = 0;
+            createDots();
+            updateCarousel();
+        }, 250);
+    });
+    
+    // Initialize
+    createDots();
+    updateCarousel();
+    startAutoPlay();
+}
+
+/* ========================================
+   NAVIGATION
    ======================================== */
 function initParticles() {
     const canvas = document.getElementById('particles-canvas');
