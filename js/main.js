@@ -147,54 +147,67 @@ function initTechCarousel() {
     
     const items = track.querySelectorAll('.tech-item');
     const totalItems = items.length;
-    let itemsPerView = getItemsPerView();
     let currentIndex = 0;
     let autoPlayInterval;
+    let itemWidth = 0;
     
-    function getItemsPerView() {
-        if (window.innerWidth <= 480) return 2;
-        if (window.innerWidth <= 768) return 3;
-        return 4;
+    function calculateItemWidth() {
+        const item = items[0];
+        if (!item) return 200;
+        const style = window.getComputedStyle(item);
+        const width = item.offsetWidth;
+        const gap = 20;
+        return width + gap;
     }
     
-    function getTotalPages() {
-        return Math.ceil(totalItems / itemsPerView);
+    function getVisibleItems() {
+        const viewport = document.querySelector('.carousel-viewport');
+        if (!viewport) return 4;
+        const viewportWidth = viewport.offsetWidth;
+        itemWidth = calculateItemWidth();
+        return Math.floor(viewportWidth / itemWidth);
+    }
+    
+    function getMaxIndex() {
+        const visible = getVisibleItems();
+        return Math.max(0, totalItems - visible);
     }
     
     function createDots() {
         dotsContainer.innerHTML = '';
-        const pages = getTotalPages();
-        for (let i = 0; i < pages; i++) {
+        const maxIdx = getMaxIndex();
+        const numDots = maxIdx + 1;
+        
+        for (let i = 0; i < numDots; i++) {
             const dot = document.createElement('button');
             dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Página ${i + 1}`);
-            dot.addEventListener('click', () => goToPage(i));
+            dot.setAttribute('aria-label', `Posición ${i + 1}`);
+            dot.addEventListener('click', () => goToIndex(i));
             dotsContainer.appendChild(dot);
         }
     }
     
     function updateCarousel() {
-        const itemWidth = items[0].offsetWidth + 20; // gap
-        const offset = currentIndex * itemsPerView * itemWidth;
+        itemWidth = calculateItemWidth();
+        const offset = currentIndex * itemWidth;
         track.style.transform = `translateX(-${offset}px)`;
         
         // Update dots
         const dots = dotsContainer.querySelectorAll('.carousel-dot');
-        const currentPage = Math.floor(currentIndex / 1);
         dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentPage);
+            dot.classList.toggle('active', i === currentIndex);
         });
     }
     
-    function goToPage(page) {
-        const totalPages = getTotalPages();
-        currentIndex = Math.max(0, Math.min(page, totalPages - 1));
+    function goToIndex(index) {
+        const maxIdx = getMaxIndex();
+        currentIndex = Math.max(0, Math.min(index, maxIdx));
         updateCarousel();
     }
     
     function next() {
-        const totalPages = getTotalPages();
-        if (currentIndex < totalPages - 1) {
+        const maxIdx = getMaxIndex();
+        if (currentIndex < maxIdx) {
             currentIndex++;
         } else {
             currentIndex = 0;
@@ -206,14 +219,14 @@ function initTechCarousel() {
         if (currentIndex > 0) {
             currentIndex--;
         } else {
-            currentIndex = getTotalPages() - 1;
+            currentIndex = getMaxIndex();
         }
         updateCarousel();
     }
     
     function startAutoPlay() {
         stopAutoPlay();
-        autoPlayInterval = setInterval(next, 4000);
+        autoPlayInterval = setInterval(next, 3500);
     }
     
     function stopAutoPlay() {
@@ -261,7 +274,6 @@ function initTechCarousel() {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            itemsPerView = getItemsPerView();
             currentIndex = 0;
             createDots();
             updateCarousel();
@@ -418,20 +430,20 @@ function initCalculator() {
     const calcSlider = document.getElementById('complexity');
     const calcAmount = document.getElementById('calc-amount');
     
-    // Base prices (Mercado Latino)
+    // Base prices (Mercado Latino - Precios Accesibles)
     const basePrices = {
-        'landing': 149,
-        'web': 299,
-        'ecommerce': 449,
-        'custom': 699
+        'landing': 79,
+        'web': 149,
+        'ecommerce': 249,
+        'custom': 399
     };
     
     // Additional service prices (Mercado Latino)
     const additionalPrices = {
-        'seo': 99,
-        'ia': 199,
-        'crm': 149,
-        'ads': 179
+        'seo': 49,
+        'ia': 99,
+        'crm': 79,
+        'ads': 89
     };
     
     let selectedProject = 'landing';
